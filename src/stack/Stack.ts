@@ -13,7 +13,7 @@ const proto = Array.prototype
 class Stack<T> implements StackInterface<T> {
   private store: Store<T>
   constructor() {
-    this.store = (<any>Object).assign(Object.create(null), { length: 0 })
+    this.store = Object.assign(Object.create(null), { length: 0 })
   }
   push(item: T): number
   push(items: Array<T>): number

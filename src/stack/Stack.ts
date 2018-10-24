@@ -1,36 +1,33 @@
-interface StackInterface<T> {
-  push(item: T): number
-  push(items: Array<T>): number
-  push(itemOritems: T | Array<T>): number
-  pop(): T
-  peek(): T
-}
-type Store<T> = {
-  length: number
-  [index: number]: T
-}
-const proto = Array.prototype
+import ArrayList from "../array/ArrayList"
+import StackInterface from './StackInterface'
 class Stack<T> implements StackInterface<T> {
-  private store: Store<T>
+  private store: ArrayList<T>
   constructor() {
-    this.store = Object.assign(Object.create(null), { length: 0 })
+    this.store = new ArrayList<T>()
   }
   push(item: T): number
-  push(items: Array<T>): number
-  push(itemOritems: T | Array<T>): number {
+  push(items: T[]): number
+  push(itemOritems: T | T[]): number {
     if (!(itemOritems instanceof Array)) {
       itemOritems = [itemOritems]
     }
-    return proto.push.call(this.store, ...itemOritems)
+    return this.store.push(...itemOritems)
   }
   pop(): T {
-    return proto.pop.call(this.store)
+    return this.store.pop()
   }
   peek(): T {
     return this.store[this.store.length - 1]
   }
-  getItems(): Store<T> {
-    return this.store
+  isEmpty(): boolean {
+    return this.store.length === 0
+  }
+  size(): number {
+    return this.store.length
+  }
+  clear(): boolean {
+    this.store.length = 0
+    return this.isEmpty()
   }
 }
 

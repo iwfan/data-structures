@@ -14,7 +14,7 @@ describe('单向链表测试', () => {
   })
 
   test('insert方法测试1, 越界异常', () => {
-    expect(linkList.insert(2, 1)).toThrow()
+    expect(() => { linkList.insert(2, 1)}).toThrow()
   })
 
   test('insert 2, 插入单个元素', () => {
